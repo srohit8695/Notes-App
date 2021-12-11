@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rough Note</string>
+    <string name="description_hint">Enter Notes</string>
+    <string name="add_notes">Add Notes</string>
+</resources>
