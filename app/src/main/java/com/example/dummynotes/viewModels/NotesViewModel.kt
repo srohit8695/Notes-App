@@ -19,4 +19,6 @@ class NotesViewModel : ViewModel() {
         list.value = tempList
     }
 
+    fun totalNotes() = list.value?.size
+
 }

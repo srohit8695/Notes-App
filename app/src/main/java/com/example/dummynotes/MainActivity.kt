@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.adapters.NotesRecyclerAdapter
+import com.example.dummynotes.databinding.ActivityMainBinding
 import com.example.dummynotes.model.Notes
 import com.example.dummynotes.viewModels.NotesViewModel
 import com.example.dummynotes.viewModels.NotesViewModelFactory
@@ -17,25 +18,22 @@ import com.example.dummynotes.viewModels.NotesViewModelFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: NotesViewModel
-    private lateinit var addData : Button
-    private lateinit var recyclerView: RecyclerView
-
+    private lateinit var mainBinding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainBinding.root)
 
-        recyclerView = findViewById(R.id.recyclerView)
         viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
-        addData = findViewById(R.id.addNotes)
 
         viewModel.list.observe(
             this, {
-                recyclerView.adapter = NotesRecyclerAdapter(viewModel, it, this)
+                mainBinding.recyclerView.adapter = NotesRecyclerAdapter(viewModel, it, this)
             }
         )
 
-        addData.setOnClickListener {
+        mainBinding.addNotes.setOnClickListener {
             addData()
         }
 
@@ -48,7 +46,8 @@ class MainActivity : AppCompatActivity() {
                  val notes = Notes(textData.text.toString())
                 viewModel.addNotes(notes)
                 textData.text.clear()
-                recyclerView.adapter?.notifyDataSetChanged()
+                viewModel.totalNotes()
+                    ?.let { mainBinding.recyclerView.adapter?.notifyItemInserted(it) }
             } else {
                 Toast.makeText(this, "Enter Notes", Toast.LENGTH_SHORT).show()
             }
@@ -56,4 +55,5 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
 }
