@@ -1,24 +1,49 @@
 package com.example.dummynotes.viewModels
 
+import android.app.Application
+import android.content.Context
 import android.provider.ContactsContract
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dummynotes.model.Notes
+import com.example.dummynotes.database.NotesEntity
+import com.example.dummynotes.database.NotesRepository
 
-class NotesViewModel : ViewModel() {
-    var list = MutableLiveData<ArrayList<Notes>>()
-    var tempList = arrayListOf<Notes>()
+class NotesViewModel(application: Application) : AndroidViewModel(application) {
+    /*var list = MutableLiveData<ArrayList<NotesEntity>>()
+    var tempList = arrayListOf<NotesEntity>()*/
 
-    fun addNotes(notes : Notes){
-        tempList.add(notes)
-        list.value = tempList
+
+    private val repository : NotesRepository
+    val list : LiveData<List<NotesEntity>>
+
+    init {
+        repository = NotesRepository(application)
+        list = repository.getAllData()
     }
 
-    fun removeNotes(notes: Notes){
-        tempList.remove(notes)
-        list.value = tempList
+
+    fun addNotes(notes : NotesEntity, context: Context){
+        /*tempList.clear()
+        NotesRepository(context).insertData(notes)
+        val datas : List<NotesEntity> = NotesRepository(context).getAllData()
+        tempList.addAll(datas)
+        list.value = tempList*/
+
+        repository.insertData(notes)
+
     }
 
-    fun totalNotes() = list.value?.size
+    fun removeNotes(notes: NotesEntity, context: Context){
+        /*tempList.remove(notes)
+        NotesRepository(context).deleteData(notes)
+        list.value = tempList*/
+
+        repository.deleteData(notes)
+
+    }
+
+    fun totalNotes() = list//list.value?.size
 
 }

@@ -6,19 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.R
+import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.model.Notes
 import com.example.dummynotes.viewModels.NotesViewModel
 import kotlinx.android.synthetic.main.recyclerview_items.view.*
 
-class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: ArrayList<Notes>, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
+class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: ArrayList<NotesEntity>, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
 
 
 
     inner class NotesViewHolder(private val binding: View) : RecyclerView.ViewHolder(binding){
-        fun bind(notes : Notes){
-            binding.description.text = notes.description
+        fun bind(notes : NotesEntity){
+            binding.description.text = notes.notes
             binding.delete.setOnClickListener {
-                notesViewModel.removeNotes(notes)
+                notesViewModel.removeNotes(notes, context)
                 notifyItemRemoved(arrayList.indexOf(notes))
             }
         }

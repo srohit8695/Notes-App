@@ -1,5 +1,6 @@
 package com.example.dummynotes
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.adapters.NotesRecyclerAdapter
+import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.databinding.ActivityMainBinding
-import com.example.dummynotes.model.Notes
 import com.example.dummynotes.viewModels.NotesViewModel
 import com.example.dummynotes.viewModels.NotesViewModelFactory
 
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.list.observe(
             this, {
-                mainBinding.recyclerView.adapter = NotesRecyclerAdapter(viewModel, it, this)
+                mainBinding.recyclerView.adapter = NotesRecyclerAdapter(viewModel,
+                    it as ArrayList<NotesEntity>, this)
             }
         )
 
@@ -43,11 +45,11 @@ class MainActivity : AppCompatActivity() {
         try {
             val textData = findViewById<EditText>(R.id.notes)
             if (textData.text.isNotEmpty()) {
-                 val notes = Notes(textData.text.toString())
-                viewModel.addNotes(notes)
+                 val notes = NotesEntity(textData.text.toString())
+                viewModel.addNotes(notes, applicationContext)
                 textData.text.clear()
                 viewModel.totalNotes()
-                    ?.let { mainBinding.recyclerView.adapter?.notifyItemInserted(it) }
+                    ?.let { mainBinding.recyclerView.adapter?.notifyItemInserted(it.value!!.size) }
             } else {
                 Toast.makeText(this, "Enter Notes", Toast.LENGTH_SHORT).show()
             }
