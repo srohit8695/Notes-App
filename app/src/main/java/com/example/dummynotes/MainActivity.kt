@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             val textData = findViewById<EditText>(R.id.notes)
             if (textData.text.isNotEmpty()) {
                  val notes = NotesEntity(textData.text.toString())
-                viewModel.addNotes(notes, applicationContext)
+                viewModel.addNotes(notes)
                 textData.text.clear()
                 viewModel.totalNotes()
                     ?.let { mainBinding.recyclerView.adapter?.notifyItemInserted(it.value!!.size) }

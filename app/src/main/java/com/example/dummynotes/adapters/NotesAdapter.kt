@@ -19,7 +19,7 @@ class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: A
         fun bind(notes : NotesEntity){
             binding.description.text = notes.notes
             binding.delete.setOnClickListener {
-                notesViewModel.removeNotes(notes, context)
+                notesViewModel.removeNotes(notes)
                 notifyItemRemoved(arrayList.indexOf(notes))
             }
         }

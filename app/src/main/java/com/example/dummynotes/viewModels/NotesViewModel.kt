@@ -24,7 +24,7 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun addNotes(notes : NotesEntity, context: Context){
+    fun addNotes(notes : NotesEntity){
         /*tempList.clear()
         NotesRepository(context).insertData(notes)
         val datas : List<NotesEntity> = NotesRepository(context).getAllData()
@@ -35,7 +35,7 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    fun removeNotes(notes: NotesEntity, context: Context){
+    fun removeNotes(notes: NotesEntity){
         /*tempList.remove(notes)
         NotesRepository(context).deleteData(notes)
         list.value = tempList*/
