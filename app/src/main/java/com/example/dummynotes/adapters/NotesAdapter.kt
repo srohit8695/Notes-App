@@ -18,6 +18,7 @@ class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: A
     inner class NotesViewHolder(private val binding: View) : RecyclerView.ViewHolder(binding){
         fun bind(notes : NotesEntity){
             binding.description.text = notes.notes
+            binding.title.text = notes.title
             binding.delete.setOnClickListener {
                 notesViewModel.removeNotes(notes)
                 notifyItemRemoved(arrayList.indexOf(notes))

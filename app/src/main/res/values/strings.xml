@@ -2,4 +2,6 @@
     <string name="app_name">Rough Note</string>
     <string name="description_hint">Enter Notes</string>
     <string name="add_notes">Add Notes</string>
+    <string name="add_notes_title">Add Notes Title</string>
+    <string name="save_notes">Save Notes</string>
 </resources>

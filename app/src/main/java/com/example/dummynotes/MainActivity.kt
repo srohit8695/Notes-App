@@ -1,6 +1,7 @@
 package com.example.dummynotes
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -35,19 +36,23 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        mainBinding.addNotes.setOnClickListener {
+        /*mainBinding.addNotes.setOnClickListener {
             addData()
+        }*/
+
+        mainBinding.addNotesFab.setOnClickListener {
+            val intent = Intent(this, AddNotes::class.java )
+            startActivity(intent)
         }
 
     }
 
-    fun addData(){
+    /*fun addData(){
         try {
-            val textData = findViewById<EditText>(R.id.notes)
-            if (textData.text.isNotEmpty()) {
-                 val notes = NotesEntity(textData.text.toString())
+            if (mainBinding.notes.text!!.isNotEmpty()) {
+                 val notes = NotesEntity(mainBinding.notes.text.toString())
                 viewModel.addNotes(notes)
-                textData.text.clear()
+                mainBinding.notes!!.text!!.clear()
                 viewModel.totalNotes()
                     ?.let { mainBinding.recyclerView.adapter?.notifyItemInserted(it.value!!.size) }
             } else {
@@ -56,6 +61,6 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 }

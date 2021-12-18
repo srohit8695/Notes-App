@@ -15,11 +15,10 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     var tempList = arrayListOf<NotesEntity>()*/
 
 
-    private val repository : NotesRepository
+    private val repository : NotesRepository = NotesRepository(application)
     val list : LiveData<List<NotesEntity>>
 
     init {
-        repository = NotesRepository(application)
         list = repository.getAllData()
     }
 

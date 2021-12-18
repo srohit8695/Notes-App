@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.textfield.TextInputEditText
+    <!--<com.google.android.material.textfield.TextInputEditText
         android:id="@+id/notes"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -21,14 +21,31 @@
         android:id="@+id/addNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_notes" />
+        android:text="@string/add_notes" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        tools:listitem="@layout/recyclerview_items"
         android:id="@+id/recyclerView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/recyclerview_items" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNotesFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="35dp"
+            android:src="@drawable/ic_baseline_note_add_24"
+            app:fabSize="normal" />
+
+    </RelativeLayout>
 
 </LinearLayout>

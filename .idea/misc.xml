@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/activity_main.xml" value="0.223731884057971" />
+        <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/activity_add_notes.xml" value="0.2" />
+        <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/recyclerview_items.xml" value="0.2" />
       </map>
     </option>
