@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dummynotes.adapters.DragUpDownAdapter
 import com.example.dummynotes.adapters.NotesRecyclerAdapter
 import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.databinding.ActivityMainBinding
@@ -31,10 +33,18 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.list.observe(
             this, {
-                mainBinding.recyclerView.adapter = NotesRecyclerAdapter(viewModel,
+                   val adapterData = NotesRecyclerAdapter(viewModel,
                     it as ArrayList<NotesEntity>, this)
+                mainBinding.recyclerView.adapter = adapterData
+
+                val callback = DragUpDownAdapter(adapterData,
+                    ItemTouchHelper.UP.or(ItemTouchHelper.DOWN), 0)
+                val helper = ItemTouchHelper(callback)
+                helper.attachToRecyclerView(mainBinding.recyclerView)
             }
         )
+
+
 
         /*mainBinding.addNotes.setOnClickListener {
             addData()
@@ -46,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
     /*fun addData(){
         try {
@@ -63,4 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
     }*/
 
+
 }
+

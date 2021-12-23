@@ -14,6 +14,19 @@ import kotlinx.android.synthetic.main.recyclerview_items.view.*
 class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: ArrayList<NotesEntity>, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
 
 
+    fun swapItems(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition..toPosition - 1) {
+                arrayList.set(i, arrayList.set(i+1, arrayList.get(i)))
+            }
+        } else {
+            for (i in fromPosition..toPosition + 1) {
+                arrayList.set(i, arrayList.set(i-1, arrayList.get(i)))
+            }
+        }
+
+        notifyItemMoved(fromPosition, toPosition)
+    }
 
     inner class NotesViewHolder(private val binding: View) : RecyclerView.ViewHolder(binding){
         fun bind(notes : NotesEntity){
