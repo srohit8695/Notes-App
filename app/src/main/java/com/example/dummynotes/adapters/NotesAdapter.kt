@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.R
 import com.example.dummynotes.database.NotesEntity
-import com.example.dummynotes.model.Notes
 import com.example.dummynotes.viewModels.NotesViewModel
 import kotlinx.android.synthetic.main.recyclerview_items.view.*
 

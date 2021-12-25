@@ -1,23 +1,16 @@
 package com.example.dummynotes
 
-import android.content.Context
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.adapters.DragUpDownAdapter
 import com.example.dummynotes.adapters.NotesRecyclerAdapter
 import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.databinding.ActivityMainBinding
 import com.example.dummynotes.viewModels.NotesViewModel
-import com.example.dummynotes.viewModels.NotesViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 

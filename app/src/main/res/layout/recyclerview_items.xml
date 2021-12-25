@@ -30,7 +30,7 @@
             <ImageView
                 android:layout_weight="1"
                 android:id="@+id/delete"
-                android:layout_width="35dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@drawable/ic_baseline_delete_forever_24"/>
 
