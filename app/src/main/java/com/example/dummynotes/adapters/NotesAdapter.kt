@@ -4,24 +4,25 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.R
 import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.viewModels.NotesViewModel
 import kotlinx.android.synthetic.main.recyclerview_items.view.*
 
-class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: ArrayList<NotesEntity>, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
+class NotesRecyclerAdapter(val notesViewModel: NotesViewModel, val arrayList: ArrayList<NotesEntity>, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
 
 
     fun swapItems(fromPosition: Int, toPosition: Int) {
         try {
             if (fromPosition < toPosition) {
                 for (i in fromPosition..toPosition - 1) {
-                    arrayList.set(i, arrayList.set(i+1, arrayList.get(i)))
+                    arrayList[i] = arrayList.set(i+1, arrayList[i])
                 }
             } else {
                 for (i in fromPosition..toPosition + 1) {
-                    arrayList.set(i, arrayList.set(i-1, arrayList.get(i)))
+                    arrayList[i] = arrayList.set(i-1, arrayList[i])
                 }
             }
 
@@ -38,6 +39,7 @@ class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: A
             binding.delete.setOnClickListener {
                 notesViewModel.removeNotes(notes)
                 notifyItemRemoved(arrayList.indexOf(notes))
+//                notifyDataSetChanged()
             }
         }
     }
