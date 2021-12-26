@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.dummynotes.activities.AddNotes
 import com.example.dummynotes.adapters.DragUpDownAdapter
 import com.example.dummynotes.adapters.NotesRecyclerAdapter
 import com.example.dummynotes.database.NotesEntity

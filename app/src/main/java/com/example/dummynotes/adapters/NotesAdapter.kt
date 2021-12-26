@@ -14,17 +14,21 @@ class NotesRecyclerAdapter (val notesViewModel: NotesViewModel, val arrayList: A
 
 
     fun swapItems(fromPosition: Int, toPosition: Int) {
-        if (fromPosition < toPosition) {
-            for (i in fromPosition..toPosition - 1) {
-                arrayList.set(i, arrayList.set(i+1, arrayList.get(i)))
+        try {
+            if (fromPosition < toPosition) {
+                for (i in fromPosition..toPosition - 1) {
+                    arrayList.set(i, arrayList.set(i+1, arrayList.get(i)))
+                }
+            } else {
+                for (i in fromPosition..toPosition + 1) {
+                    arrayList.set(i, arrayList.set(i-1, arrayList.get(i)))
+                }
             }
-        } else {
-            for (i in fromPosition..toPosition + 1) {
-                arrayList.set(i, arrayList.set(i-1, arrayList.get(i)))
-            }
-        }
 
-        notifyItemMoved(fromPosition, toPosition)
+            notifyItemMoved(fromPosition, toPosition)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     inner class NotesViewHolder(private val binding: View) : RecyclerView.ViewHolder(binding){

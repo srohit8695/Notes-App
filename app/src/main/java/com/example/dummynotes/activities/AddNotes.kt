@@ -1,14 +1,12 @@
-package com.example.dummynotes
+package com.example.dummynotes.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.databinding.ActivityAddNotesBinding
-import com.example.dummynotes.databinding.ActivityMainBinding
 import com.example.dummynotes.viewModels.NotesViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class AddNotes : AppCompatActivity() {
 

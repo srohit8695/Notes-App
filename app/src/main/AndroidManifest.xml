@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DummyNotes">
         <activity
-            android:name=".AddNotes"
+            android:name=".activities.AddNotes"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
