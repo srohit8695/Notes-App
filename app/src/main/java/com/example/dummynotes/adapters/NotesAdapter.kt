@@ -10,9 +10,11 @@ import com.example.dummynotes.R
 import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.viewModels.NotesViewModel
 import kotlinx.android.synthetic.main.recyclerview_items.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-class NotesRecyclerAdapter(val notesViewModel: NotesViewModel, val arrayList: ArrayList<NotesEntity>, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
-
+class NotesRecyclerAdapter(val deleteIconInterface: DeleteIconInterface, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
+    private val arrayList = ArrayList<NotesEntity>()
 
     fun swapItems(fromPosition: Int, toPosition: Int) {
         try {
@@ -37,9 +39,7 @@ class NotesRecyclerAdapter(val notesViewModel: NotesViewModel, val arrayList: Ar
             binding.description.text = notes.notes
             binding.title.text = notes.title
             binding.delete.setOnClickListener {
-                notesViewModel.removeNotes(notes)
-                notifyItemRemoved(arrayList.indexOf(notes))
-//                notifyDataSetChanged()
+                deleteIconInterface.onDeleteIconClick(notes)
             }
         }
     }
@@ -50,8 +50,20 @@ class NotesRecyclerAdapter(val notesViewModel: NotesViewModel, val arrayList: Ar
 
     override fun onBindViewHolder(holder: NotesRecyclerAdapter.NotesViewHolder, position: Int) {
         holder.bind(arrayList.get(position))
+
     }
 
     override fun getItemCount() = arrayList.size
 
+    fun updateList(newList: List<NotesEntity>) {
+        arrayList.clear()
+        arrayList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
 }
+
+interface DeleteIconInterface {
+    fun onDeleteIconClick(note: NotesEntity)
+}
+
