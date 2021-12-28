@@ -20,8 +20,8 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun addNotes(notes : NotesEntity){
-        repository.insertData(notes)
+    fun addNotes(notes : NotesEntity) : Long{
+        return repository.insertData(notes)
     }
 
     fun removeNotes(notes: NotesEntity){

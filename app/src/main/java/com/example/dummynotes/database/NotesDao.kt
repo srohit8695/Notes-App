@@ -7,7 +7,7 @@ import androidx.room.*
 interface NotesDao {
 
     @Insert
-    fun insertData(notesEntity: NotesEntity)
+    fun insertData(notesEntity: NotesEntity) : Long
 
     @Delete
     fun deleteData(notesEntity: NotesEntity)

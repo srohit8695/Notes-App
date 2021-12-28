@@ -7,8 +7,8 @@ class NotesRepository(context: Context) {
 
     var dbms : NotesDao = NotesDb.getInstance(context)?.notesDao()!!
 
-    fun insertData(notesEntity: NotesEntity){
-        dbms.insertData(notesEntity)
+    fun insertData(notesEntity: NotesEntity) : Long{
+        return dbms.insertData(notesEntity)
     }
 
     fun deleteData(notesEntity: NotesEntity){
@@ -22,6 +22,5 @@ class NotesRepository(context: Context) {
     fun getAllData() : LiveData<List<NotesEntity>>{
         return dbms.showAll()
     }
-
 
 }
