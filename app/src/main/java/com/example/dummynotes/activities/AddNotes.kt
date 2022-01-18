@@ -14,17 +14,34 @@ class AddNotes : AppCompatActivity() {
 
     private lateinit var viewModel: NotesViewModel
     private lateinit var addNotesBinding: ActivityAddNotesBinding
+    private lateinit var notesString: String
+    private lateinit var titleString: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        addNotesBinding = ActivityAddNotesBinding.inflate(layoutInflater)
-        setContentView(addNotesBinding.root)
+        try {
+            addNotesBinding = ActivityAddNotesBinding.inflate(layoutInflater)
+            setContentView(addNotesBinding.root)
 
-        viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
+            viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
 
-        addNotesBinding.saveNotes.setOnClickListener {
-            addNotes()
+            addNotesBinding.saveNotes.setOnClickListener {
+                addNotes()
+            }
+
+            notesString = intent.getStringExtra("title").toString()
+            titleString = intent.getStringExtra("message").toString()
+
+            if (!notesString.equals("null")) {
+                addNotesBinding.title.setText(titleString)
+                addNotesBinding.description.setText(notesString)
+            }
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
     }

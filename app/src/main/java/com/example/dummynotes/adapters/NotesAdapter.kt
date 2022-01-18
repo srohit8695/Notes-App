@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.recyclerview_items.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NotesRecyclerAdapter(val deleteIconInterface: DeleteIconInterface, val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
+class NotesRecyclerAdapter( val context: Context) : RecyclerView.Adapter<NotesRecyclerAdapter.NotesViewHolder>(){
     private val arrayList = ArrayList<NotesEntity>()
 
     fun swapItems(fromPosition: Int, toPosition: Int) {
@@ -38,9 +38,7 @@ class NotesRecyclerAdapter(val deleteIconInterface: DeleteIconInterface, val con
         fun bind(notes : NotesEntity){
             binding.description.text = notes.notes
             binding.title.text = notes.title
-            binding.delete.setOnClickListener {
-                deleteIconInterface.onDeleteIconClick(notes)
-            }
+
         }
     }
 
@@ -61,9 +59,11 @@ class NotesRecyclerAdapter(val deleteIconInterface: DeleteIconInterface, val con
         notifyDataSetChanged()
     }
 
+    fun noteFromPosition(position : Int) : NotesEntity{
+        return arrayList[position]
+    }
+
 }
 
-interface DeleteIconInterface {
-    fun onDeleteIconClick(note: NotesEntity)
-}
+
 

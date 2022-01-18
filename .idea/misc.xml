@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/activity_add_notes.xml" value="0.2" />
         <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/Rohit/AndroidStudioProjects/dummyNotes/app/src/main/res/layout/recyclerview_items.xml" value="0.2" />
