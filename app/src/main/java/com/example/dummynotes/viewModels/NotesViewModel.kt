@@ -28,6 +28,10 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteData(notes)
     }
 
+    fun deleteByID(id : Int){
+        repository.deleteById(id)
+    }
+
     fun totalNotes() = list
 
 }

@@ -18,4 +18,8 @@ interface NotesDao {
     @Query("Select * from notesTable")
     fun showAll(): LiveData<List<NotesEntity>>
 
+    @Query("DELETE FROM notesTable WHERE id = :id")
+    fun deleteIndividual(id : Int)
+
+
 }

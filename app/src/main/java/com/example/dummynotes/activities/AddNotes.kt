@@ -16,6 +16,7 @@ class AddNotes : AppCompatActivity() {
     private lateinit var addNotesBinding: ActivityAddNotesBinding
     private lateinit var notesString: String
     private lateinit var titleString: String
+    private lateinit var position: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,7 @@ class AddNotes : AppCompatActivity() {
 
             notesString = intent.getStringExtra("title").toString()
             titleString = intent.getStringExtra("message").toString()
+            position = intent.getStringExtra("position").toString()
 
             if (!notesString.equals("null")) {
                 addNotesBinding.title.setText(titleString)
@@ -52,13 +54,15 @@ class AddNotes : AppCompatActivity() {
                 if (addNotesBinding.description.text!!.isNotEmpty()) {
                     val insertData = viewModel.addNotes(NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString()))
 
-//                    if(insertData == dataSize){
                         addNotesBinding.title!!.text!!.clear()
                         addNotesBinding.description!!.text!!.clear()
-                    Snackbar.make(View(this@AddNotes),"Saved Successfully",Snackbar.LENGTH_LONG).show()
-                   /* }else{
-                        Toast.makeText(this, "Issue in saving data", Toast.LENGTH_SHORT).show()
-                    }*/
+
+                    Toast.makeText(baseContext,"Saved Successfully", Toast.LENGTH_SHORT).show()
+
+
+                    if(!position.equals("null")){
+                        viewModel.deleteByID(position!!.toInt())
+                    }
 
                 } else {
                     Toast.makeText(this, "Enter Description", Toast.LENGTH_SHORT).show()

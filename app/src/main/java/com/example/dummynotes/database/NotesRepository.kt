@@ -23,4 +23,8 @@ class NotesRepository(context: Context) {
         return dbms.showAll()
     }
 
+    fun deleteById(id:Int){
+        dbms.deleteIndividual(id)
+    }
+
 }
