@@ -35,6 +35,23 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Priority"
+        android:textSize="20dp"/>
+
+    <com.google.android.material.slider.Slider
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:valueFrom="1"
+        android:valueTo="5"
+        android:stepSize="1"
+        android:id="@+id/prioritySlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_margin="10dp"

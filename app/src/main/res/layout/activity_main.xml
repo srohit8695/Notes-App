@@ -9,19 +9,7 @@
     tools:context=".MainActivity">
 
 
-    <!--<com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/notes"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="@string/description_hint"
-        android:inputType="text"
-        android:textSize="20sp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_notes" />-->
 
     <RelativeLayout
         android:layout_width="match_parent"

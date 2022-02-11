@@ -32,26 +32,43 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
 
         try {
+
             viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
             val dataAdapter = NotesRecyclerAdapter(this)
             mainBinding.recyclerView.adapter = dataAdapter
 
             viewModel.list.observe(
-                this, {
-                    dataAdapter.updateList(it)
-                }
-            )
+                this
+            ) {
+                dataAdapter.updateList(it)
+            }
 
-            val callback = DragUpDownAdapter(dataAdapter,
-                ItemTouchHelper.UP.or(ItemTouchHelper.DOWN), 0)
-            val helper = ItemTouchHelper(callback)
-            helper.attachToRecyclerView(mainBinding.recyclerView)
 
             mainBinding.addNotesFab.setOnClickListener {
                 val intent = Intent(this, AddNotes::class.java )
                 startActivity(intent)
             }
 
+
+            /*val callback = DragUpDownAdapter(dataAdapter,
+                ItemTouchHelper.UP.or(ItemTouchHelper.DOWN), 0)*/
+            val callback = DragUpDownAdapter(dataAdapter,0, 0)
+            val helper = ItemTouchHelper(callback)
+            helper.attachToRecyclerView(mainBinding.recyclerView)
+
+
+            swiprFeature(dataAdapter)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+
+    fun swiprFeature(dataAdapter : NotesRecyclerAdapter){
+
+        try {
             object : SwipeHelper(this, recyclerView, false) {
 
                 override fun instantiateUnderlayButton(viewHolder: RecyclerView.ViewHolder?, underlayButtons: MutableList<UnderlayButton>?) {
@@ -78,9 +95,6 @@ class MainActivity : AppCompatActivity() {
 
                     ))
 
-
-
-
                     underlayButtons?.add(SwipeHelper.UnderlayButton("Edit",
                         AppCompatResources.getDrawable(this@MainActivity,R.drawable.ic_baseline_edit_24),
                         Color.parseColor("#e35d5d"),  R.attr.text_color,
@@ -96,7 +110,6 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     ))
-
 
                     // More Button
                     underlayButtons?.add(SwipeHelper.UnderlayButton("More",
@@ -119,8 +132,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
 
 
 
