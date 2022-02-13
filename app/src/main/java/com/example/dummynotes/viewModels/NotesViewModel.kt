@@ -32,6 +32,10 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteById(id)
     }
 
+    fun updateNotes(notes : NotesEntity){
+        repository.updateData(notes)
+    }
+
     fun totalNotes() = list
 
 }

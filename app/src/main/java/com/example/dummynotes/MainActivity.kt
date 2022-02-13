@@ -99,11 +99,9 @@ class MainActivity : AppCompatActivity() {
                         AppCompatResources.getDrawable(this@MainActivity,R.drawable.ic_baseline_edit_24),
                         Color.parseColor("#e35d5d"),  R.attr.text_color,
                         UnderlayButtonClickListener { pos: Int ->
-
                             val noteToEdit = dataAdapter.noteFromPosition(pos)
-
                             val intent = Intent(baseContext, AddNotes::class.java )
-                            intent.putExtra("position", pos)
+                            intent.putExtra("id", noteToEdit.id.toString())
                             intent.putExtra("title", noteToEdit.title)
                             intent.putExtra("message", noteToEdit.notes)
                             startActivity(intent)

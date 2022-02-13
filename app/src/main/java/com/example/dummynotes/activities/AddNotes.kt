@@ -16,7 +16,7 @@ class AddNotes : AppCompatActivity() {
     private lateinit var addNotesBinding: ActivityAddNotesBinding
     private lateinit var notesString: String
     private lateinit var titleString: String
-    private lateinit var position: String
+    private lateinit var positionID: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,19 +28,18 @@ class AddNotes : AppCompatActivity() {
 
             viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
 
-            addNotesBinding.saveNotes.setOnClickListener {
-                addNotes()
-            }
+            notesString = intent.getStringExtra("message")?:"no data"
+            titleString = intent.getStringExtra("title")?:"no data"
+            positionID = intent.getStringExtra("id")?:"new"
 
-            notesString = intent.getStringExtra("title").toString()
-            titleString = intent.getStringExtra("message").toString()
-            position = intent.getStringExtra("position").toString()
-
-            if (!notesString.equals("null")) {
+            if (!positionID.equals("new")) {
                 addNotesBinding.title.setText(titleString)
                 addNotesBinding.description.setText(notesString)
             }
 
+            addNotesBinding.saveNotes.setOnClickListener {
+                addNotes()
+            }
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -48,20 +47,24 @@ class AddNotes : AppCompatActivity() {
 
     }
 
-    fun addNotes(){
+    private fun addNotes(){
         try {
             if (addNotesBinding.title.text!!.isNotEmpty()) {
                 if (addNotesBinding.description.text!!.isNotEmpty()) {
-                    val insertData = viewModel.addNotes(NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString()))
 
-                        addNotesBinding.title!!.text!!.clear()
-                        addNotesBinding.description!!.text!!.clear()
+                    if (positionID == "new") {
 
-                    Toast.makeText(baseContext,"Saved Successfully", Toast.LENGTH_SHORT).show()
+                        viewModel.addNotes(NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString()))
+                        addNotesBinding.title.text!!.clear()
+                        addNotesBinding.description.text!!.clear()
+                        Toast.makeText(baseContext,"Saved Successfully", Toast.LENGTH_SHORT).show()
 
+                    } else {
 
-                    if(!position.equals("null")){
-                        viewModel.deleteByID(position!!.toInt())
+                        val updatedNote = NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString(), positionID.toInt() )
+                        viewModel.updateNotes(updatedNote)
+                        Toast.makeText(baseContext,"Updated Successfully", Toast.LENGTH_SHORT).show()
+
                     }
 
                 } else {
