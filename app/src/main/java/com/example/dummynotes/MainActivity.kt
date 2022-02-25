@@ -1,15 +1,12 @@
 package com.example.dummynotes
 
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.activities.AddNotes
 import com.example.dummynotes.adapters.DragUpDownAdapter
 import com.example.dummynotes.adapters.NotesRecyclerAdapter
-import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.databinding.ActivityMainBinding
-import com.example.dummynotes.others.DialogPopUp
 import com.example.dummynotes.others.SwipeHelper
+import com.example.dummynotes.others.SwipeHelper.UnderlayButtonClickListener
+import com.example.dummynotes.others.UtilFun
 import com.example.dummynotes.viewModels.NotesViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         try {
 
             viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
-            val dataAdapter = NotesRecyclerAdapter(this)
+            val dataAdapter = NotesRecyclerAdapter(this) {
+                customBriefViewDialog(it.title, it.notes)
+            }
             mainBinding.recyclerView.adapter = dataAdapter
 
             viewModel.list.observe(
@@ -131,17 +130,18 @@ class MainActivity : AppCompatActivity() {
 
                     ))
 
-                    // More Button
+
                     underlayButtons?.add(SwipeHelper.UnderlayButton("More",
-                        AppCompatResources.getDrawable(this@MainActivity,R.drawable.ic_baseline_more_horiz_24),
+                        AppCompatResources.getDrawable(this@MainActivity,R.drawable.ic_baseline_share_24),
                         Color.parseColor("#60d690"),  R.attr.text_color,
                         UnderlayButtonClickListener { pos: Int ->
-
-                            /*Toast.makeText(this@MainActivity,"More Button CLicked at Position: " + pos,
-                                Toast.LENGTH_SHORT).show()*/
                             val noteToView = dataAdapter.noteFromPosition(pos)
-                            customBriefViewDialog(noteToView.title, noteToView.notes)
-                            dataAdapter.notifyItemChanged(pos)
+                                val shareText = Intent(Intent.ACTION_SEND)
+                                shareText.type = "text/plain"
+                                val messageToShare = noteToView.title+"\n"+noteToView.notes
+                                shareText.putExtra(Intent.EXTRA_SUBJECT, "Subject from "+UtilFun.getApplicationName(application))
+                                shareText.putExtra(Intent.EXTRA_TEXT, messageToShare)
+                                startActivity(Intent.createChooser(shareText, "Share Via"))
                         }
 
                     ))
