@@ -1,7 +1,10 @@
 package com.example.dummynotes.others
 
 import android.content.Context
+import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
+import com.example.dummynotes.R
+import java.io.FileDescriptor
 
 class DialogPopUp {
 
@@ -18,6 +21,18 @@ class DialogPopUp {
             builder.show()
 
         }
+
+
+
+       /* fun customBriefViewDialog(context: Context, title: String, descriptor: String){
+
+            val dialogView = .inflate(R.layout.custome_dialog_brief_view, null)
+
+            val customDialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .show()
+
+        }*/
 
 
 

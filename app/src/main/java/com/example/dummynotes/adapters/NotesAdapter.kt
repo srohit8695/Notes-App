@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dummynotes.R
@@ -38,7 +39,6 @@ class NotesRecyclerAdapter( val context: Context) : RecyclerView.Adapter<NotesRe
         fun bind(notes : NotesEntity){
             binding.description.text = notes.notes
             binding.title.text = notes.title
-
         }
     }
 
@@ -47,8 +47,10 @@ class NotesRecyclerAdapter( val context: Context) : RecyclerView.Adapter<NotesRe
     }
 
     override fun onBindViewHolder(holder: NotesRecyclerAdapter.NotesViewHolder, position: Int) {
-        holder.bind(arrayList.get(position))
+        holder.bind(arrayList[position])
+        holder.itemView.setOnClickListener {
 
+        }
     }
 
     override fun getItemCount() = arrayList.size

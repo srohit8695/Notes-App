@@ -7,16 +7,11 @@
     android:layout_margin="2dp">
 
     <LinearLayout
+        android:id="@+id/mainLayout"
         android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-    <!--    <LinearLayout
-            android:weightSum="10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
 
             <TextView
                 android:textStyle="bold"
@@ -26,10 +21,6 @@
                 android:ellipsize="end"
                 android:textColor="?attr/text_color"
                 android:textSize="20sp"/>
-
-
-
-<!--        </LinearLayout>-->
 
         <TextView
             android:maxLines="2"

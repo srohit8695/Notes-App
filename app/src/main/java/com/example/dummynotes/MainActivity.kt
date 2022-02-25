@@ -1,10 +1,13 @@
 package com.example.dummynotes
 
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
@@ -57,6 +60,8 @@ class MainActivity : AppCompatActivity() {
             helper.attachToRecyclerView(mainBinding.recyclerView)
 
 
+
+
             swiprFeature(dataAdapter)
 
         } catch (e: Exception) {
@@ -66,7 +71,24 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun swiprFeature(dataAdapter : NotesRecyclerAdapter){
+    fun customBriefViewDialog( title: String, descriptor: String){
+
+        val dialogView = layoutInflater.inflate(R.layout.custome_dialog_brief_view, null)
+
+        val customDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .show()
+
+        val titleTV = dialogView.findViewById<TextView>(R.id.title)
+        titleTV.text = title
+
+        val descriptionTV = dialogView.findViewById<TextView>(R.id.description)
+        descriptionTV.text = descriptor
+
+    }
+
+
+    private fun swiprFeature(dataAdapter : NotesRecyclerAdapter){
 
         try {
             object : SwipeHelper(this, recyclerView, false) {
@@ -115,8 +137,10 @@ class MainActivity : AppCompatActivity() {
                         Color.parseColor("#60d690"),  R.attr.text_color,
                         UnderlayButtonClickListener { pos: Int ->
 
-                            Toast.makeText(this@MainActivity,"More Button CLicked at Position: " + pos,
-                                Toast.LENGTH_SHORT).show()
+                            /*Toast.makeText(this@MainActivity,"More Button CLicked at Position: " + pos,
+                                Toast.LENGTH_SHORT).show()*/
+                            val noteToView = dataAdapter.noteFromPosition(pos)
+                            customBriefViewDialog(noteToView.title, noteToView.notes)
                             dataAdapter.notifyItemChanged(pos)
                         }
 
