@@ -125,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                             intent.putExtra("id", noteToEdit.id.toString())
                             intent.putExtra("title", noteToEdit.title)
                             intent.putExtra("message", noteToEdit.notes)
+                            intent.putExtra("priority", noteToEdit.priority)
                             startActivity(intent)
                         }
 

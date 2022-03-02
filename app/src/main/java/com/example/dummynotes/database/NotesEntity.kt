@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class NotesEntity(
     val title : String,
     val notes: String,
+    val priority: Int?,
     @PrimaryKey(autoGenerate = true) val id: Int?= null
 )

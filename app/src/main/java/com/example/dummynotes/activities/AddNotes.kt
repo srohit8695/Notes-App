@@ -36,7 +36,15 @@ class AddNotes : AppCompatActivity() {
             notesString = intent.getStringExtra("message")?:"no data"
             titleString = intent.getStringExtra("title")?:"no data"
             positionID = intent.getStringExtra("id")?:"new"
-//            priorityLevelCount = intent.getFloatExtra("priority")?:0.0f
+            try {
+                if (intent.hasExtra("priority")) {
+                    if (true) {
+                        priorityLevelCount = intent.getIntExtra("priority", 1).toFloat()
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
             if (!positionID.equals("new")) {
                 addNotesBinding.title.setText(titleString)
@@ -86,14 +94,14 @@ class AddNotes : AppCompatActivity() {
 
                     if (positionID == "new") {
 
-                        viewModel.addNotes(NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString()))
+                        viewModel.addNotes(NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString(), addNotesBinding.prioritySlider.value.toInt()))
                         addNotesBinding.title.text!!.clear()
                         addNotesBinding.description.text!!.clear()
                         Toast.makeText(baseContext,"Saved Successfully", Toast.LENGTH_SHORT).show()
 
                     } else {
 
-                        val updatedNote = NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString(), positionID.toInt() )
+                        val updatedNote = NotesEntity(addNotesBinding.title.text.toString(),addNotesBinding.description.text.toString(), addNotesBinding.prioritySlider.value.toInt(), positionID.toInt())
                         viewModel.updateNotes(updatedNote)
                         Toast.makeText(baseContext,"Updated Successfully", Toast.LENGTH_SHORT).show()
 
