@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="?attr/text_color"
+        android:text="Sort"
+        android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort A - Z"
+        android:id="@+id/asscendingSort"/>
+
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort Z - A"
+        android:id="@+id/descendingSort"/>
+
+</LinearLayout>

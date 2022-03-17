@@ -46,5 +46,11 @@
         android:textColor="?attr/text_color"
         android:text="Priority level 4"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply Filters"
+        android:textSize="20sp"
+        android:id="@+id/applyFiltersButton"/>
 
 </LinearLayout>

@@ -4,7 +4,9 @@ package com.example.dummynotes
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.TextView
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -19,7 +21,9 @@ import com.example.dummynotes.others.SwipeHelper
 import com.example.dummynotes.others.SwipeHelper.UnderlayButtonClickListener
 import com.example.dummynotes.others.UtilFun
 import com.example.dummynotes.viewModels.NotesViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -157,6 +161,64 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_screen_title_options,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_filter -> {
+            showBottomSheetFilters()
+            true
+        }
+        R.id.action_sort ->{
+            showBottomSheetSort()
+            true
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showBottomSheetFilters() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.filter_bottom_sheet)
+        val priority1 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority1)
+        val priority2 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority2)
+        val priority3 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority3)
+        val priority4 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority4)
+        val applyFilters = bottomSheetDialog.findViewById<Button>(R.id.applyFiltersButton)
+
+        applyFilters?.setOnClickListener {
+
+            if(priority1!!.isChecked)
+                Toast.makeText(this,"priority 1",Toast.LENGTH_SHORT).show()
+
+            if(priority2!!.isChecked)
+                Toast.makeText(this,"priority 2",Toast.LENGTH_SHORT).show()
+
+            if(priority3!!.isChecked)
+                Toast.makeText(this,"priority 3",Toast.LENGTH_SHORT).show()
+
+            if(priority4!!.isChecked)
+                Toast.makeText(this,"priority 4",Toast.LENGTH_SHORT).show()
+
+        }
+
+
+        bottomSheetDialog.show()
+    }
+
+    private fun showBottomSheetSort() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.sort_bottom_sheet)
+        val asscendingSort = bottomSheetDialog.findViewById<RadioButton>(R.id.asscendingSort)
+        val description = bottomSheetDialog.findViewById<RadioButton>(R.id.description)
+
+
+        bottomSheetDialog.show()
+    }
 
 
 }
