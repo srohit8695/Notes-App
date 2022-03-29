@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dummynotes.adapters.NotesRecyclerAdapter
 import com.example.dummynotes.database.NotesEntity
 import com.example.dummynotes.database.NotesRepository
 
@@ -16,7 +17,7 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val list : LiveData<List<NotesEntity>>
 
     init {
-        list = repository.getAllData()
+            list = repository.getAllData()
     }
 
 
@@ -37,5 +38,15 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun totalNotes() = list
+
+    fun priorityData(priority1 : Boolean, priority2 : Boolean, priority3 : Boolean, priority4 : Boolean, dataAdapter : NotesRecyclerAdapter){
+        try {
+//            list.let { list.value?.let { it1 -> it.value!!.toMutableList().removeAll(it1) } }
+//            val data = NotesEntity("dummy title","dummy description",2)
+//            list.value!!.toMutableList().add(data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 }

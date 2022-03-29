@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: NotesViewModel
     private lateinit var mainBinding : ActivityMainBinding
+    private lateinit var dataAdapter : NotesRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         try {
 
             viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
-            val dataAdapter = NotesRecyclerAdapter(this) {
+            dataAdapter = NotesRecyclerAdapter(this) {
                 customBriefViewDialog(it.title, it.notes)
             }
             mainBinding.recyclerView.adapter = dataAdapter
@@ -73,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     fun customBriefViewDialog( title: String, descriptor: String){
 
         val dialogView = layoutInflater.inflate(R.layout.custome_dialog_brief_view, null)
@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
         descriptionTV.text = descriptor
 
     }
-
 
     private fun swiprFeature(dataAdapter : NotesRecyclerAdapter){
 
@@ -160,7 +159,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.home_screen_title_options,menu)
         return super.onCreateOptionsMenu(menu)
@@ -192,17 +190,32 @@ class MainActivity : AppCompatActivity() {
 
         applyFilters?.setOnClickListener {
 
+            var checkPriority1 = false
+            var checkPriority2 = false
+            var checkPriority3 = false
+            var checkPriority4 = false
+
             if(priority1!!.isChecked)
-                Toast.makeText(this,"priority 1",Toast.LENGTH_SHORT).show()
+            {
+                checkPriority1 = true
+            }
 
             if(priority2!!.isChecked)
-                Toast.makeText(this,"priority 2",Toast.LENGTH_SHORT).show()
+            {
+                checkPriority2 = true
+            }
 
             if(priority3!!.isChecked)
-                Toast.makeText(this,"priority 3",Toast.LENGTH_SHORT).show()
+            {
+                checkPriority3 = true
+            }
 
             if(priority4!!.isChecked)
-                Toast.makeText(this,"priority 4",Toast.LENGTH_SHORT).show()
+            {
+                checkPriority4 = true
+            }
+
+            viewModel.priorityData(checkPriority1, checkPriority2, checkPriority3, checkPriority4, dataAdapter)
 
         }
 
@@ -215,7 +228,6 @@ class MainActivity : AppCompatActivity() {
         bottomSheetDialog.setContentView(R.layout.sort_bottom_sheet)
         val asscendingSort = bottomSheetDialog.findViewById<RadioButton>(R.id.asscendingSort)
         val description = bottomSheetDialog.findViewById<RadioButton>(R.id.description)
-
 
         bottomSheetDialog.show()
     }
