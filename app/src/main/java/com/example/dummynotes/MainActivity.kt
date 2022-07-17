@@ -42,11 +42,14 @@ class MainActivity : AppCompatActivity() {
             dataAdapter = NotesRecyclerAdapter(this) {
                 customBriefViewDialog(it.title, it.notes)
             }
+
             mainBinding.recyclerView.adapter = dataAdapter
 
             viewModel.list.observe(
                 this
             ) {
+                for(i in it)
+                print("Rohit "+i.toString()+"\n")
                 dataAdapter.updateList(it)
             }
 
@@ -180,6 +183,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBottomSheetFilters() {
+
+        /*var binding: FilterBottomSheetBinding
+
+        binding = BottomSheetDatePickerBinding.inflate(
+            LayoutInflater.from(context)
+        )
+        setContentView(binding.root)*/
+
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.filter_bottom_sheet)
         val priority1 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority1)
@@ -187,6 +198,12 @@ class MainActivity : AppCompatActivity() {
         val priority3 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority3)
         val priority4 = bottomSheetDialog.findViewById<CheckBox>(R.id.priority4)
         val applyFilters = bottomSheetDialog.findViewById<Button>(R.id.applyFiltersButton)
+        val clearFilters = bottomSheetDialog.findViewById<Button>(R.id.clearFiltersButton)
+
+        clearFilters?.setOnClickListener {
+            viewModel.list.value?.let { it1 -> dataAdapter.updateList(it1) }
+            bottomSheetDialog.dismiss()
+        }
 
         applyFilters?.setOnClickListener {
 
@@ -215,8 +232,11 @@ class MainActivity : AppCompatActivity() {
                 checkPriority4 = true
             }
 
-            viewModel.priorityData(checkPriority1, checkPriority2, checkPriority3, checkPriority4, dataAdapter)
+            if (checkPriority1 || checkPriority2 || checkPriority3 || checkPriority4) {//executes only if any check box is ticked
+                viewModel.priorityData(checkPriority1, checkPriority2, checkPriority3, checkPriority4, dataAdapter)
+            }
 
+            bottomSheetDialog.dismiss()
         }
 
 
@@ -234,4 +254,43 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
